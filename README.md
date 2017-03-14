@@ -21,10 +21,16 @@ Mount mysql container exposing ports and setting name to 'mysql-database'
  ```
  docker run --name mysql-database -p 3306:3306 -e MYSQL_ROOT_PASSWORD=[MySQLPassword] -d mysql
  ```
-Mount storage server container and link to mysql-database
+
+Create a docker vulume for persistent file storage
+ ```
+ docker create -v /var/artemis --name artemis-backend marclaliberte/artemis-storage /bin/true
+ ```
+
+Mount storage server container with persistentfile storage and link to mysql-database 
 
  ```
- docker run --name artemis-storage --link mysql-database:mysql -it artemis-storage
+ docker run --name artemis-storage --link mysql-database:mysql --volumes-from artemis-backend -it marclaliberte/artemis-storage
  ```
 
 Within the container, edit hpfeeds and mysql settings in config.cfg
