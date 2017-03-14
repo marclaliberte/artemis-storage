@@ -8,7 +8,7 @@ Download latest container for storage server and mysql
 
  ```
  docker pull marclaliberte/artemis-storage
- docker pull mysql/mysql-server
+ docker pull mysql
  ```
 
 Create user-defined Docker network
