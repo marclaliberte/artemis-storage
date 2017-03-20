@@ -39,7 +39,7 @@ RUN pip install -e git+https://github.com/rep/evnet.git#egg=evnet-dev
 
 # Setup storage scripts
 WORKDIR /opt
-RUN git clone https://github.com/marclaliberte/artemis.git && \
+RUN git clone -b dev https://github.com/marclaliberte/artemis.git && \
   cd artemis && \
   cp config.cfg.default config.cfg && \
   sed -i "s/127\.0\.0\.1/mysql/g" /opt/artemis/config.cfg && \
