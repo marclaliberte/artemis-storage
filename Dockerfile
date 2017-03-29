@@ -34,7 +34,8 @@ RUN pip install -q cffi \
       greenlet \
       gevent \
       MySQL-python \
-      python-daemon
+      python-daemon \
+      virustotal-api
 RUN pip install -e git+https://github.com/rep/evnet.git#egg=evnet-dev
 
 # Setup storage scripts
