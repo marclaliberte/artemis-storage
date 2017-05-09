@@ -34,12 +34,13 @@ RUN pip install -q cffi \
       greenlet \
       gevent \
       MySQL-python \
-      python-daemon
+      python-daemon \
+      django
 RUN pip install -e git+https://github.com/rep/evnet.git#egg=evnet-dev
 
 # Setup storage scripts
 WORKDIR /opt
-RUN git clone -b dev https://github.com/marclaliberte/artemis.git && \
+RUN git clone -b WebGUI https://github.com/marclaliberte/artemis.git && \
   cd artemis && \
   cp config.cfg.default config.cfg && \
   sed -i "s/127\.0\.0\.1/mysql/g" /opt/artemis/config.cfg && \
@@ -47,8 +48,11 @@ RUN git clone -b dev https://github.com/marclaliberte/artemis.git && \
   mkdir /var/artemis/files && \
   mkdir /var/artemis/files/attachment && \
   mkdir /var/artemis/files/inline && \
-  mkdir /var/artemis/files/thug
-  
+  mkdir /var/artemis/files/thug  
 
 WORKDIR /opt/artemis
-ENTRYPOINT bash
+
+# Setup django
+RUN django-admin startproject artemis_gui
+CMD ["nohup", "/usr/bin/python", "/opt/artemis/artemis_gui/manage.py", "runserver", "0.0.0.0:80", "&"]
+ENTRYPOINT /bin/bash
