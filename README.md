@@ -19,7 +19,7 @@ Create user-defined Docker network
 
 Mount mysql container exposing ports and setting name to 'mysql-database'
  ```
- docker run --name mysql-database -p 3306:3306 -e MYSQL_ROOT_PASSWORD=[MySQLPassword] -d mysql
+ docker run --name mysql-database -p 127.0.0.1:3306:3306 -e MYSQL_ROOT_PASSWORD=[MySQLPassword] -d mysql
  ```
 
 Create a docker vulume for persistent file storage
